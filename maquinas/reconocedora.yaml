@@ -1,0 +1,65 @@
+# Reconoce {w#w | w pertenece a {a,b}*}. Adapta la máquina M del Laboratorio 10.
+q_states:
+  q_list: [q0, q1, q2, q3, q4, q5]
+  initial: q0
+  final: q5
+alphabet: [a, b, "#"]
+tape_alphabet: [a, b, "#", X, null]
+
+delta:
+  # q0: tomar el siguiente símbolo de la primera copia y guardarlo en memoria.
+  - params: {initial_state: q0, mem_cache_value: null, tape_input: a}
+    output: {final_state: q1, mem_cache_value: a, tape_output: null, tape_displacement: R}
+  - params: {initial_state: q0, mem_cache_value: null, tape_input: b}
+    output: {final_state: q1, mem_cache_value: b, tape_output: null, tape_displacement: R}
+  - params: {initial_state: q0, mem_cache_value: null, tape_input: "#"}
+    output: {final_state: q4, mem_cache_value: null, tape_output: "#", tape_displacement: R}
+
+  # q1: llegar al separador conservando el símbolo recordado.
+  - params: {initial_state: q1, mem_cache_value: a, tape_input: a}
+    output: {final_state: q1, mem_cache_value: a, tape_output: a, tape_displacement: R}
+  - params: {initial_state: q1, mem_cache_value: a, tape_input: b}
+    output: {final_state: q1, mem_cache_value: a, tape_output: b, tape_displacement: R}
+  - params: {initial_state: q1, mem_cache_value: a, tape_input: "#"}
+    output: {final_state: q2, mem_cache_value: a, tape_output: "#", tape_displacement: R}
+  - params: {initial_state: q1, mem_cache_value: b, tape_input: a}
+    output: {final_state: q1, mem_cache_value: b, tape_output: a, tape_displacement: R}
+  - params: {initial_state: q1, mem_cache_value: b, tape_input: b}
+    output: {final_state: q1, mem_cache_value: b, tape_output: b, tape_displacement: R}
+  - params: {initial_state: q1, mem_cache_value: b, tape_input: "#"}
+    output: {final_state: q2, mem_cache_value: b, tape_output: "#", tape_displacement: R}
+
+  # q2: saltar las X y comparar con el siguiente símbolo de la segunda copia.
+  - params: {initial_state: q2, mem_cache_value: a, tape_input: X}
+    output: {final_state: q2, mem_cache_value: a, tape_output: X, tape_displacement: R}
+  - params: {initial_state: q2, mem_cache_value: a, tape_input: a}
+    output: {final_state: q3, mem_cache_value: null, tape_output: X, tape_displacement: L}
+  - params: {initial_state: q2, mem_cache_value: b, tape_input: X}
+    output: {final_state: q2, mem_cache_value: b, tape_output: X, tape_displacement: R}
+  - params: {initial_state: q2, mem_cache_value: b, tape_input: b}
+    output: {final_state: q3, mem_cache_value: null, tape_output: X, tape_displacement: L}
+
+  # q3: volver hasta el blanco que dejó el último símbolo de la primera copia.
+  - params: {initial_state: q3, mem_cache_value: null, tape_input: a}
+    output: {final_state: q3, mem_cache_value: null, tape_output: a, tape_displacement: L}
+  - params: {initial_state: q3, mem_cache_value: null, tape_input: b}
+    output: {final_state: q3, mem_cache_value: null, tape_output: b, tape_displacement: L}
+  - params: {initial_state: q3, mem_cache_value: null, tape_input: "#"}
+    output: {final_state: q3, mem_cache_value: null, tape_output: "#", tape_displacement: L}
+  - params: {initial_state: q3, mem_cache_value: null, tape_input: X}
+    output: {final_state: q3, mem_cache_value: null, tape_output: X, tape_displacement: L}
+  - params: {initial_state: q3, mem_cache_value: null, tape_input: null}
+    output: {final_state: q0, mem_cache_value: null, tape_output: null, tape_displacement: R}
+
+  # q4: aceptar únicamente si la segunda copia también se consumió completa.
+  - params: {initial_state: q4, mem_cache_value: null, tape_input: X}
+    output: {final_state: q4, mem_cache_value: null, tape_output: X, tape_displacement: R}
+  - params: {initial_state: q4, mem_cache_value: null, tape_input: null}
+    output: {final_state: q5, mem_cache_value: null, tape_output: null, tape_displacement: R}
+
+simulation_strings:
+  - "ab#ab"
+  - "aab#aab"
+  - "ab#ba"
+  - "ab#aba"
+

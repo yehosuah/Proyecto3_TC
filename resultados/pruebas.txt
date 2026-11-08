@@ -1,0 +1,35 @@
+Python 3.9.6
+Pruebas ejecutadas desde una copia limpia y un entorno nuevo.
+Comando: python -m unittest discover -s tests -v
+
+test_argumentos_invalidos (test_cli.PruebasConsola) ... ok
+test_ejecuta_el_lote_y_guarda_la_misma_salida (test_cli.PruebasConsola) ... ok
+test_error_de_archivo_sin_traza_de_python (test_cli.PruebasConsola) ... ok
+test_la_salida_no_puede_sobrescribir_el_yaml (test_cli.PruebasConsola) ... ok
+test_limite_y_codigo_de_salida (test_cli.PruebasConsola) ... ok
+test_campos_ausentes_y_desconocidos (test_lector.PruebasLector) ... ok
+test_error_de_archivo (test_lector.PruebasLector) ... ok
+test_lee_el_contrato_del_pdf (test_lector.PruebasLector) ... ok
+test_los_valores_vacios_del_yaml_son_blancos (test_lector.PruebasLector) ... ok
+test_rechaza_configuraciones_inconsistentes (test_lector.PruebasLector) ... ok
+test_transicion_repetida_o_ambigua (test_lector.PruebasLector) ... ok
+test_yaml_invalido_y_claves_repetidas (test_lector.PruebasLector) ... ok
+test_casos_vacios_y_separadores (test_maquinas.PruebasMaquinas) ... ok
+test_copiadora_exhaustiva_y_composicion_hasta_longitud_8 (test_maquinas.PruebasMaquinas) ... ok
+test_entradas_mas_largas (test_maquinas.PruebasMaquinas) ... ok
+test_los_ocho_casos_del_video (test_maquinas.PruebasMaquinas) ... ok
+test_reconocedora_exhaustiva_hasta_longitud_9 (test_maquinas.PruebasMaquinas) ... ok
+test_aceptacion_inicial_y_falta_de_transicion (test_simulador.PruebasSimulador) ... ok
+test_aceptacion_y_rechazo_en_el_ultimo_paso_permitido (test_simulador.PruebasSimulador) ... ok
+test_blanco_y_letra_b_mayuscula_son_distintos (test_simulador.PruebasSimulador) ... ok
+test_cada_entrada_comienza_de_nuevo (test_simulador.PruebasSimulador) ... ok
+test_descripcion_coloca_el_estado_antes_de_la_celda_leida (test_simulador.PruebasSimulador) ... ok
+test_entradas_y_limites_invalidos (test_simulador.PruebasSimulador) ... ok
+test_escritura_borrado_movimientos_y_cinta_izquierda (test_simulador.PruebasSimulador) ... ok
+test_la_memoria_decide_la_transicion (test_simulador.PruebasSimulador) ... ok
+test_un_bucle_se_interrumpe_sin_declarar_rechazo (test_simulador.PruebasSimulador) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.771s
+
+OK
